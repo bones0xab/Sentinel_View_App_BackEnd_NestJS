@@ -1,0 +1,60 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AuthResponse {
+  accessToken: String!
+  user: Users!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Mutation {
+  createRole(data: rolesInput!): roles!
+  createUser(data: UserInput!): Users!
+  delete(id: ID!): Users!
+  deleteRole(id: String!): roles!
+  login(password: String!, username: String!): AuthResponse!
+  resetPassword(changes: UserInput!, userid: String!): Users!
+  updateRole(changes: rolesInput!, id: String!): roles!
+  updateUser(changes: UserInput!, id: ID!): Users!
+}
+
+type Query {
+  getOneUser(id: ID!): Users!
+  getRole(name: rolesInput!): roles!
+  getRoles: [roles!]!
+  getUsers: [Users!]!
+}
+
+input UserInput {
+  createdAt: DateTime
+  email: String
+  id: String
+  passwordHash: String
+  roles: [rolesInput!]!
+  username: String
+}
+
+type Users {
+  createdAt: DateTime!
+  email: String!
+  id: ID!
+  passwordHash: String
+  roles: [roles!]
+  username: String!
+}
+
+type roles {
+  id: ID!
+  name: String!
+  users: [Users!]!
+}
+
+input rolesInput {
+  id: String!
+  name: String!
+}
